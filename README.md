@@ -11,4 +11,7 @@ A responsive, time-bound quiz application built using HTML, CSS, and JavaScript.
 - 🔒 One-time attempt per email (localStorage-based lock)
 - 🎨 Glassmorphism UI with animated transitions
 
-## 📁 File Structure
+## 🌐 Live Demo
+
+Access the live quiz app here:  
+🔗 [Quiz Form Hosted on GitHub Pages](https://md-aliraj.github.io/Quiz-Form/)
