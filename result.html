@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz Result</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #1f1c2c, #928dab);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .result-card {
+      background: #2e2b3f;
+      padding: 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .result-card h2 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #4ade80;
+    }
+
+    .result-card p {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #ff6ec4;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #7873f5;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #5a54d1;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="result-card">
+    <h2>🎉 Quiz Result</h2>
+    <p>Name: <span class="highlight" id="userName">Loading...</span></p>
+    <p>Email: <span class="highlight" id="userEmail">Loading...</span></p>
+    <p>Score: <span class="highlight" id="userScore">Loading...</span></p>
+    <button onclick="goHome()">Go to Home</button>
+    <button onclick="viewCertificate()">View Certificate</button>
+
+  </div>
+  <script>
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    const quizResult = JSON.parse(localStorage.getItem("quizResult"));
+
+    document.getElementById("userName").textContent = userData?.name || "N/A";
+    document.getElementById("userEmail").textContent = userData?.email || "N/A";
+    document.getElementById("userScore").textContent = quizResult?.score + "/" + quizResult?.total || "N/A";
+
+    function goHome() {
+      window.location.href = "form1.html";
+    }
+    function viewCertificate() {
+  window.location.href = "certificate.html";
+}
+  </script>
+</body>
+</html>

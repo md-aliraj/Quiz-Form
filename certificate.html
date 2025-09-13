@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz Certificate</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to right, #1f1c2c, #928dab);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+    #certificate {
+      background: #fff;
+      padding: 50px 60px;
+      border: 10px solid #4ade80;
+      border-radius: 20px;
+      width: 750px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+    h1 {
+      font-size: 38px;
+      margin-bottom: 10px;
+      color: #4ade80;
+    }
+    h2 {
+      font-size: 24px;
+      margin-bottom: 30px;
+      font-weight: normal;
+      color: #555;
+    }
+    .details {
+      font-size: 20px;
+      margin: 14px 0;
+      color: #222;
+    }
+    .highlight {
+      font-weight: bold;
+      font-size: 22px;
+      color: #ff6ec4;
+    }
+    .date {
+      margin-top: 30px;
+      font-style: italic;
+      font-size: 16px;
+      color: #666;
+    }
+    button {
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      padding: 12px 24px;
+      background-color: #7873f5;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    button:hover {
+      background-color: #5a54d1;
+    }
+
+        .icon {
+      font-size: 60px;
+      color: #d32f2f;
+      margin-bottom: 10px;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div id="certificate">
+     <div class="icon">🖥️</div>
+
+    <h1>Certificate of Achievement</h1>
+    <h2>This is to certify that</h2>
+    <p class="details"><span class="highlight" id="userName">[Name]</span></p>
+    <p class="details">has successfully completed the <strong>Computer Quiz</strong></p>
+    <p class="details">with a score of <span class="highlight" id="userScore">[Score]</span></p>
+    <p class="date">Date: <span id="quizDate">[Date]</span></p>
+  </div>
+
+  <button onclick="downloadCertificate()">Download Certificate</button>
+
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script>
+    window.onload = function () {
+      const userData = JSON.parse(localStorage.getItem("userData"));
+      const quizResult = JSON.parse(localStorage.getItem("quizResult"));
+
+      document.getElementById("userName").textContent = userData?.name || "N/A";
+      document.getElementById("userScore").textContent = quizResult?.score + "/" + quizResult?.total || "N/A";
+      document.getElementById("quizDate").textContent = new Date().toLocaleDateString("en-IN");
+    };
+
+    function downloadCertificate() {
+      const cert = document.getElementById("certificate");
+      cert.scrollIntoView({ behavior: "instant", block: "center" });
+
+      setTimeout(() => {
+        html2canvas(cert, {
+          scale: 2,
+          useCORS: true,
+          allowTaint: true
+        }).then(canvas => {
+          const link = document.createElement("a");
+          link.download = "Quiz-Certificate.png";
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+        });
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
